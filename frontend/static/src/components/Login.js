@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Cookies from 'js-cookie';
@@ -48,7 +48,7 @@ const Login = ({appState, setAppState}) => {
         <main>
             <h2>Login</h2>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasiUsername">
+                <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
                         name="username" 
@@ -68,9 +68,8 @@ const Login = ({appState, setAppState}) => {
                         required 
                         onChange={handleInput}/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                <Button variant="primary" type="submit">Log in</Button>
+                <Form.Text>Don't have an account? Click <Link className="create-account-link" to={'/create-account'}>here</Link> to create one.</Form.Text>
             </Form>
         </main>
     )

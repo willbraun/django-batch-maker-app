@@ -10,7 +10,7 @@ const ReactRouter = ({appState, setAppState}) => {
             {appState.auth && <Header appState={appState} setAppState={setAppState}/>}
             <Routes>
                 <Route path='/login' element={<Login appState={appState} setAppState={setAppState}/>}/>
-                <Route path='/create-account' element={<CreateAccount />}/>
+                <Route path='/create-account' element={<CreateAccount appState={appState} setAppState={setAppState}/>}/>
                 <Route path='/' element={appState.auth ? <Home /> : <Navigate to='/login' />}>
                     <Route  />
                     
