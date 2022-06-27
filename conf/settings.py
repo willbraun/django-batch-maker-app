@@ -30,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'https://django-batch-maker-app-will.herokuapp.com',
+    'django-batch-maker-app-will.herokuapp.com',
 ]
 
 
