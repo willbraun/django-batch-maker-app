@@ -47,7 +47,7 @@ const CreateAccount = ({appState, setAppState}) => {
     }
     
     return (
-        <main>
+        <main className="create-account">
             <h2>Create Account</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">

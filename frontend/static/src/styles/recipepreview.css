@@ -1,0 +1,21 @@
+.recipe-preview {
+    margin: 0 1rem 1rem 0;
+}
+
+.img-box {
+    width: var(--recipe-preview-size);
+    height: var(--recipe-preview-size);
+}
+
+.card-img {
+    object-fit: cover;
+    height: 100%
+}
+
+.card-title {
+    background-color: #333;
+    color: #fff;
+    width: fit-content;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+}

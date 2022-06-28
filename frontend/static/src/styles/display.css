@@ -1,12 +1,16 @@
 .sidebar {
+    position: fixed;
     display: inline-block;
-    width: 10rem;
-    height: calc(100vh - var(--header-height));
+    width: var(--sidebar-width);
+    height: 100vh;
     background-color: #ccc;
     border-right: 1px solid #999;
 }
 
 main {
-    display: inline-block;
+    position: absolute;
+    left: var(--sidebar-width);
     height: calc(100vh - var(--header-height));
+    overflow: auto;
+    margin: 1rem 2rem;
 }

@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Cookies from 'js-cookie';
 import { handleError } from './../helpers';
+import './../styles/auth.css'
 
 const Login = ({appState, setAppState}) => {
     const [state, setState] = useState({
@@ -45,7 +46,7 @@ const Login = ({appState, setAppState}) => {
     }
     
     return (
-        <main>
+        <main className="login">
             <h2>Login</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">

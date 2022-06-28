@@ -1,7 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 from django.conf import settings
-from units.models import Unit
+# from units.models import Unit
 
 # Create your models here.
 
@@ -12,6 +12,22 @@ class Recipe(models.Model):
         ('DI', 'Dinner',),
         ('DE', 'Dessert',),
     )
+
+    TEMP_UNITS = (
+        ('FA', 'Fahrenheit',),
+        ('CE', 'Celsius',),
+    )
+
+    # MEASURE_UNITS = (
+    #     ('TS', 'Teaspoon',),
+    #     ('TB', 'Tablespoon',),
+    #     ('CU', 'Cup',),
+    #     ('GA', 'Gallon',),
+    #     ('ML', 'Milliliter',),
+    #     ('LI', 'Liter',),
+    #     ('KG', 'Kilogram',),
+    #     ('GR', 'Gram',),
+    # )
     
     title = models.CharField(max_length=255)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
@@ -21,7 +37,8 @@ class Recipe(models.Model):
     prep_time = models.PositiveIntegerField()
     cook_time = models.PositiveIntegerField()
     cook_temp = models.PositiveIntegerField()
-    temp_unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
+    temp_unit = models.CharField(max_length=2, choices=TEMP_UNITS)
+    # temp_unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
     yield_quantity = models.FloatField()
     yield_name = models.CharField(max_length=255)
     notes = models.TextField(blank=True)

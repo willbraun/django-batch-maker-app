@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Recipe
-from .serializers import RecipeSerializer
+from .serializers import RecipeSerializer, RecipePreviewSerializer
 
 # Create your views here.
-class MyRecipesListCreateApiView(generics.ListCreateAPIView):
-    serializer_class = RecipeSerializer
+class MyRecipesListApiView(generics.ListAPIView):
+    serializer_class = RecipePreviewSerializer
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user).order_by('-created_at')
+
+
+class MyRecipesCreateApiView(generics.CreateAPIView):
+    serializer_class = RecipeSerializer
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -16,12 +20,12 @@ class MyRecipesListCreateApiView(generics.ListCreateAPIView):
 
 class PublicRecipesListApiView(generics.ListAPIView):
     queryset = Recipe.objects.filter(public=True).order_by('-created_at')
-    serializer_class = RecipeSerializer
+    serializer_class = RecipePreviewSerializer
 
 
 class PopularRecipesListApiView(generics.ListAPIView):
     queryset = Recipe.objects.filter(public=True).order_by('-shares')
-    serializer_class = RecipeSerializer
+    serializer_class = RecipePreviewSerializer
 
 
 # after creating get users favorites view, create another view that combines the above querysets into one view, getting first 4 or 5 with [:4]

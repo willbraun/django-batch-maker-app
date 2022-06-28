@@ -4,9 +4,7 @@ import Sidebar from './Sidebar';
 import Login from './Login';
 import CreateAccount from './CreateAccount';
 import Home from './Home';
-import MyRecipes from './MyRecipes';
-import Public from './Public';
-import Popular from './Popular';
+import RecipeList from './RecipeList';
 
 const ReactRouter = ({appState, setAppState}) => {
     return (
@@ -22,9 +20,9 @@ const ReactRouter = ({appState, setAppState}) => {
                 <Route path='/create-account' element={<CreateAccount appState={appState} setAppState={setAppState}/>}/>
                 <Route path='/' element={appState.auth ? undefined : <Navigate to='/login' />}>
                     <Route index element={<Home />}/>
-                    <Route path='my-recipes' element={<MyRecipes />}/>
-                    <Route path='public-recipes' element={<Public />}/>
-                    <Route path='popular-recipes' element={<Popular />}/>
+                    <Route path='my-recipes' element={<RecipeList key={0} pageTitle={'My Recipes'} url={`/api_v1/recipes/`} />}/>
+                    <Route path='public-recipes' element={<RecipeList key={1} pageTitle={'Public Recipes'} url={`/api_v1/recipes/public/`} />}/>
+                    <Route path='popular-recipes' element={<RecipeList key={2} pageTitle={'Popular Recipes'} url={`/api_v1/recipes/popular/`} />}/>
                     
                 </Route>
             </Routes>
