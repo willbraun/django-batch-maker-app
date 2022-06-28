@@ -1,11 +1,11 @@
 from django.urls import include, path
 
-from recipes.views import HomeRecipesListApiView, FavoriteRecipesListApiView, PopularRecipesListApiView, PublicRecipesListApiView, MyRecipesCreateApiView, MyRecipesListApiView
+from recipes.views import home_recipes_by_category, FavoriteRecipesListApiView, PopularRecipesListApiView, PublicRecipesListApiView, MyRecipesCreateApiView, MyRecipesListApiView
 
 app_name = 'recipes'
 
 urlpatterns = [
-    path('home/', HomeRecipesListApiView.as_view(), name='home_recipes'),
+    path('home/', home_recipes_by_category, name='home_recipes'),
     path('favorites/<str:home>/', FavoriteRecipesListApiView.as_view(), name='favorite_recipes'),
     path('favorites/', FavoriteRecipesListApiView.as_view(), name='favorite_recipes'),
     path('popular/<str:home>/', PopularRecipesListApiView.as_view(), name='popular_recipes'),

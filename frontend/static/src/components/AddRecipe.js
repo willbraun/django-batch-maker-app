@@ -1,6 +1,13 @@
+
+import RecipeInput from './RecipeInput';
+
 const AddRecipe = () => {
+    
+    
     return (
-        <main>AddRecipe</main>
+        <main>
+            <RecipeInput />
+        </main>
     )
 }
 

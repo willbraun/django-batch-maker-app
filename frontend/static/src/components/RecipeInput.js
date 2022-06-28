@@ -1,6 +1,12 @@
+import Form from 'react-bootstrap/Form';
+
 const RecipeInput = () => {
     return (
-        <main>RecipeInput</main>
+        <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <div></div>
+            </Form.Group>
+        </Form>
     )
 }
 
