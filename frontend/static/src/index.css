@@ -1,7 +1,8 @@
 :root {
 	--header-height: 3.5rem;
     --sidebar-width: 10rem;
-    --recipe-preview-size: 15rem;
+    --recipe-preview-size: 15vw;
+    --light-grey: #ccc;
 }
 
 body {

@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+# from recipes.views import PopularRecipesListApiView
 from .models import Recipe
 
 
@@ -11,12 +13,21 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class RecipePreviewSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Recipe
-        fields = ('id', 'title','image',)
+        fields = ('id', 'title','image', 'popular')
 
 
 class RecipeFavoriteUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = ('id',)
+
+
+class RecipeHomeSerializer(serializers.ModelSerializer):
+   
+
+    class Meta:
+        model = Recipe
+        fields = '__all__'
