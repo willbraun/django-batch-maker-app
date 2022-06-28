@@ -10,6 +10,7 @@
 main {
     position: absolute;
     left: var(--sidebar-width);
+    width: calc(100vw - var(--sidebar-width));
     height: calc(100vh - var(--header-height));
     overflow: auto;
     margin: 1rem 2rem;

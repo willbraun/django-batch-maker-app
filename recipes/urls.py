@@ -5,7 +5,6 @@ from recipes.views import home_recipes_by_category, FavoriteRecipesListApiView, 
 app_name = 'recipes'
 
 urlpatterns = [
-    path('home/', home_recipes_by_category, name='home_recipes'),
     path('favorites/<str:home>/', FavoriteRecipesListApiView.as_view(), name='favorite_recipes'),
     path('favorites/', FavoriteRecipesListApiView.as_view(), name='favorite_recipes'),
     path('popular/<str:home>/', PopularRecipesListApiView.as_view(), name='popular_recipes'),

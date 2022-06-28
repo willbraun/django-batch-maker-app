@@ -2,7 +2,7 @@ from django.shortcuts import render
 from itertools import chain
 from rest_framework import generics
 from .models import Recipe, User
-from .serializers import RecipeHomeSerializer, RecipeSerializer, RecipePreviewSerializer, RecipeFavoriteUpdateSerializer
+from .serializers import RecipeSerializer, RecipePreviewSerializer, RecipeFavoriteUpdateSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 

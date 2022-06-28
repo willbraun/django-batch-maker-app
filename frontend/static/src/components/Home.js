@@ -13,28 +13,32 @@ const Home = () => {
         ingredients: [],
     })
 
-    const getHomeList = async (section, url) => {
-        const response = await fetch(url).catch(handleError);
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok!');
+    
+    useEffect(() => {
+        const getHomeList = async () => {
+            const response = await fetch('/api_v1/home/').catch(handleError);
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok!');
+            }
+    
+            const data = await response.json();
+            setState({...state, 
+                myRecipes: data["my_recipes"],
+                public: data.public,
+                popular: data.popular,
+                favorites: data.favorites,
+                // ingredients eventually
+            });
         }
 
-        const data = await response.json();
-        setState({...state, [section]: data});
-    }
-
-    useEffect(() => {
-        getHomeList('myRecipes', '/api_v1/recipes/home/');
-        getHomeList('public', '/api_v1/recipes/public/home/');
-        // getHomeList('popular', '/api_v1/recipes/popular/home/');
-        // getHomeList('favorites', '/api_v1/recipes/favorites/home/');
+        getHomeList();
     }, [])
 
     const myRecipesHomeList = state.myRecipes.map(recipe => <RecipePreview key={recipe.id} {...recipe}/>)
     const publicHomeList = state.public.map(recipe => <RecipePreview key={recipe.id} {...recipe}/>)
-    // const popularHomeList = state.popular.map(recipe => <RecipePreview key={recipe.id} {...recipe}/>)
-    // const favoritesHomeList = state.favorites.map(recipe => <RecipePreview key={recipe.id} {...recipe}/>)
+    const popularHomeList = state.popular.map(recipe => <RecipePreview key={recipe.id} {...recipe}/>)
+    const favoritesHomeList = state.favorites.map(recipe => <RecipePreview key={recipe.id} {...recipe}/>)
 
     return (
         <main className="main-home">
@@ -56,13 +60,13 @@ const Home = () => {
             <section>
                 <h3>Popular Recipes</h3>
                 <div className="home-row">
-                    {/* {popularHomeList} */}
+                    {popularHomeList}
                 </div>
             </section>
             <section>
                 <h3>My Favorite Recipes</h3>
                 <div className="home-row">
-                    {/* {favoritesHomeList} */}
+                    {favoritesHomeList}
                 </div>
             </section>
             <section>

@@ -6,6 +6,7 @@ const AddRecipe = () => {
     
     return (
         <main>
+            <div>Temporary - add form</div>
             <RecipeInput />
         </main>
     )
