@@ -39,11 +39,12 @@ class FavoriteRecipeUpdateApiView(generics.UpdateAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeFavoriteUpdateSerializer
 
-    # def get_queryset(self):
-    #     return self
+    def get_queryset(self):
+        recipe_id = self.kwargs['pk']
+        return Recipe.objects.filter(id=recipe_id)
 
     def perform_update(self, serializer):
-        return self.favorited_by.add(self.request.user)
+        self.favorited_by.add(self.request.user)
         
 
 
