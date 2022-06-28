@@ -14,3 +14,9 @@ class RecipePreviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = ('id', 'title','image',)
+
+
+class RecipeFavoriteUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipe
+        fields = ('id',)

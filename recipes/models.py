@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 from django.conf import settings
+from accounts.models import User
 # from units.models import Unit
 
 # Create your models here.
@@ -44,6 +45,7 @@ class Recipe(models.Model):
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     shares = models.PositiveIntegerField(default=0, blank=True)
+    favorited_by = models.ManyToManyField(User, related_name='+')
 
     def __str__(self):
         return self.title

@@ -23,6 +23,7 @@ const ReactRouter = ({appState, setAppState}) => {
                     <Route path='my-recipes' element={<RecipeList key={0} pageTitle={'My Recipes'} url={`/api_v1/recipes/`} />}/>
                     <Route path='public-recipes' element={<RecipeList key={1} pageTitle={'Public Recipes'} url={`/api_v1/recipes/public/`} />}/>
                     <Route path='popular-recipes' element={<RecipeList key={2} pageTitle={'Popular Recipes'} url={`/api_v1/recipes/popular/`} />}/>
+                    <Route path='favorites' element={<RecipeList key={3} pageTitle={'Favorites'} url={`/api_v1/recipes/favorites/`} />}/>
                     
                 </Route>
             </Routes>

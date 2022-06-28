@@ -20,6 +20,9 @@ const Sidebar = () => {
                 <Nav.Item>
                     <Link to={'/popular-recipes'}>Popular Recipes</Link>
                 </Nav.Item>
+                <Nav.Item>
+                    <Link to={'/favorites'}>Favorites</Link>
+                </Nav.Item>
             </Nav>
         </aside>
     )
