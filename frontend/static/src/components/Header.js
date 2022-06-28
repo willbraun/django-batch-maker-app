@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -30,9 +30,11 @@ const Header = ({appState, setAppState}) => {
     }
     
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" className="header">
             <Container>
-                <Navbar.Brand href="#home">Batch Maker</Navbar.Brand>
+                <Navbar.Brand>
+                    <Link to={'/'}>Batch Maker</Link>
+                </Navbar.Brand>
                 <Nav className="me-auto">
                     {/* add replace title values with imgs from font awesome */}
                     <NavDropdown title="Plus">
