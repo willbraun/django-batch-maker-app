@@ -3,3 +3,36 @@
     margin: auto;
     padding: 2rem 0;
 }
+
+.recipe-image-button {
+    width: 10vw;
+    height: 10vw;
+    border: none;
+    border-radius: 5px;
+    background-color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.recipe-image-button:hover {
+    filter: brightness(90%);
+}
+
+.recipe-image-button img {
+    object-fit: cover;
+}
+
+.no-image-background {
+    width: 100%;
+}
+
+.no-image-background img {
+    width: 50%;
+}
+
+.no-image-background p {
+    font-size: 1.5vw;
+    margin: 0;
+}

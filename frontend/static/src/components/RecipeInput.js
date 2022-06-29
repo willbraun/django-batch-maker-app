@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Step from './Step';
 import './../styles/recipeinput.css';
+import plus from './../images/plus-solid.svg'
 
 const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid }) => {
     const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = addEditRecipeState;
+    const [preview, setPreview] = useState(image);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -12,6 +17,18 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
             ...prevState,
             [name]: value,
         }));
+    }
+
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        setAddEditRecipeState({...addEditRecipeState, image: file});
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreview(reader.result);
+        }
+
+        reader.readAsDataURL(file);
     }
 
     const togglePublic = () => {
@@ -27,45 +44,72 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
             isEditing={false}
         />)
 
+    const imageInput = document.querySelector('.recipe-input-image');
     
     return (
         <Form className="add-recipe-form">
             <p>Basic Info</p>
-            <Form.Group className="mb-3" controlId="image">
-                <Form.Label className="upload-recipe-image">
-                    <Form.Control type="file" />
-                    {image ? <img src={image} alt={title}/> : undefined}
-                </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="title">
-                <Form.Control 
-                    name="title"
-                    type="text"
-                    value={title}
-                    placeholder="Recipe Name"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
-            <Form.Group controlId="by">
-                <Form.Control 
-                    name="by"
-                    type="text"
-                    value={by}
-                    placeholder="By"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
-            <Form.Group controlId="public">
-                <Form.Check 
-                    name="public"
-                    type="checkbox"
-                    checked={publicRecipe}
-                    onChange={togglePublic}
-                    />
-                <Form.Label>Make it Public</Form.Label>
-            </Form.Group>
+            <Row>
+                <Col xs={3}>
+                    <Form.Group controlId="image">
+                        <button 
+                            type="button" 
+                            className="recipe-image-button"
+                            onClick={() => imageInput.click()}>
+                            <Form.Control 
+                                type="file"
+                                className="recipe-input-image"
+                                style={{display: 'none'}}
+                                onChange={handleImage} />
+                            
+                            {preview ? 
+                                <img className="image-button-background" src={preview} alt={title}/> : 
+                                <div class="no-image-background">
+                                    <img className="plus" src={plus} alt="plus icon" />
+                                    <p>Add Photo</p>
+                                </div>}
+                        </button>
+                    </Form.Group>
+                </Col>
+                <Col xs={9}>
+                    <Row>
+                        <Form.Group controlId="title">
+                            <Form.Control 
+                                name="title"
+                                type="text"
+                                value={title}
+                                placeholder="Recipe Name"
+                                required
+                                onChange={handleInput}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        <Form.Group controlId="by">
+                            <Form.Control 
+                                name="by"
+                                type="text"
+                                value={by}
+                                placeholder="By"
+                                required
+                                onChange={handleInput}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        <Form.Group controlId="public">
+                            <Form.Check 
+                                name="public"
+                                type="checkbox"
+                                checked={publicRecipe}
+                                onChange={togglePublic}
+                                />
+                            <Form.Label>Make it Public</Form.Label>
+                        </Form.Group>
+                    </Row>
+                
+                </Col>
+            </Row>
             <Form.Group controlId="private">
                 <Form.Check 
                     name="private"
@@ -124,7 +168,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 <Form.Select
                     name="recipeType"
                     required 
-                    value={recipeType}
+                    value={tempUnit}
                     onChange={handleInput}>
                         <option value="FA">ºF</option>
                         <option value="CE">ºC</option>
@@ -167,10 +211,10 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 <Form.Control 
                     as="textarea"
                     rows={3}
-                    value={addEditRecipeState.notes}
+                    value={notes}
                     onChange={handleInput}/>
             </Form.Group>
-            <Button variant="success">Save this Recipe!</Button>
+            <Button variant="success" type="submit">Save this Recipe!</Button>
         </Form>
     )
 }
