@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { units } from './../data';
 
-const StepIngredient = ({stepInputState, setStepInputState, start, ingUid, setIngUid, amount, unit, name}) => {    
-    const [isEditing, setIsEditing] = useState(start);
+const StepIngredient = ({stepState, setStepState, start, ingUid, setIngUid, amount, unit, name}) => {    
+    const isEditing = start;
     const [state, setState] = useState({
         id: ingUid,
         amount: amount ? amount : '',
@@ -22,11 +22,10 @@ const StepIngredient = ({stepInputState, setStepInputState, start, ingUid, setIn
         const keys = Object.keys(state);
         const values = Object.values(state);
         if (!values.includes('')) {
-            const newList = stepInputState.ingredients;
+            const newList = stepState.ingredients;
             newList.push(state);
-            setStepInputState({...stepInputState, ingredients: newList});
+            setStepState({...stepState, ingredients: newList});
             setIngUid(ingUid + 1)
-            setIsEditing(false);
         }
         else {
             const missingKeys = keys
@@ -38,10 +37,10 @@ const StepIngredient = ({stepInputState, setStepInputState, start, ingUid, setIn
     }
 
     const deleteIngredient = () => {
-        const newList = stepInputState.ingredients;
+        const newList = stepState.ingredients;
         const index = newList.findIndex(ingredient => ingredient.id === state.id)
         newList.splice(index, 1);
-        setStepInputState({...stepInputState, ingredients: newList});
+        setStepState({...stepState, ingredients: newList});
     }
 
     const unitList = units.filter(unit => unit.measureIngredient).map(unit => <option key={unit.id} value={unit.id}>{unit.name}s</option>);

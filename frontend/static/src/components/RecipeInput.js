@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import StepInput from './StepInput';
+import Step from './Step';
 import './../styles/recipeinput.css';
 
 const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid }) => {
@@ -20,7 +20,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
 
     // take steps JSON and map it to Step component.
     const stepList = addEditRecipeState.steps.map((step, i) => 
-        <StepInput 
+        <Step 
             key={i}   
             {...step} 
             addEditRecipeState={addEditRecipeState} 
@@ -153,7 +153,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
             </Form.Group>
             
             {stepList}
-            <StepInput  
+            <Step  
                 key={steps.length + 1}
                 addEditRecipeState={addEditRecipeState} 
                 setAddEditRecipeState={setAddEditRecipeState} 
