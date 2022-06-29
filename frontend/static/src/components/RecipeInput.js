@@ -144,8 +144,8 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState }) => {
                 />
             </Form.Group>
             
-            {/* insert steps list here with list of Step components. starts at 0 so only input is showing. */}
-            <StepInput addEditRecipeState={addEditRecipeState} setAddEditRecipeState={setAddEditRecipeState}/>
+            {/* insert steps list here with list of Step components. start = false */}
+            <StepInput addEditRecipeState={addEditRecipeState} setAddEditRecipeState={setAddEditRecipeState} start={true}/>
 
             <Form.Group>
                 <Form.Text>Personal Notes</Form.Text> 

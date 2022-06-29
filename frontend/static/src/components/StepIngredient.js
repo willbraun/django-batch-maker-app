@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { units } from './../data';
 
-const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit, name}) => {    
+const StepIngredient = ({stepInputState, setStepInputState, start, uid, setUid, amount, unit, name}) => {    
     const [isEditing, setIsEditing] = useState(start);
     const [state, setState] = useState({
-        id: stepInputState.uid,
+        id: uid,
         amount: amount ? amount : '',
         unit: unit ? unit : '',
         name: name ? name : '',
@@ -24,7 +24,8 @@ const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit,
         if (!values.includes('')) {
             const newList = stepInputState.ingredients;
             newList.push(state);
-            setStepInputState({...stepInputState, ingredients: newList, uid: stepInputState.uid + 1});
+            setStepInputState({...stepInputState, ingredients: newList});
+            setUid(uid + 1)
             setIsEditing(false);
         }
         else {
@@ -84,7 +85,6 @@ const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit,
             {isEditing ? 
                 <button type="button" onClick={() => addIngredient()}>+</button> :
                 <button type="button" onClick={() => deleteIngredient()}>-</button> 
-                // if minus is clicked, DELETE ingredient component
             }
         </article>
     )
