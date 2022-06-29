@@ -14,7 +14,7 @@ const AddRecipe = () => {
         tempUnit: 'FA',
         yieldQuantity: '',
         yieldName: '',
-        steps: {},
+        steps: [],
         notes: ''
     }
     
@@ -22,7 +22,7 @@ const AddRecipe = () => {
     
     return (
         <main>
-            <RecipeInput parentState={state} setParentState={setState}/>
+            <RecipeInput addEditRecipeState={state} setAddEditRecipeState={setState}/>
         </main>
     )
 }

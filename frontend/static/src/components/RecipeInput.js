@@ -1,21 +1,25 @@
-
+import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import './../styles/recipeinput.css'
+import StepInput from './StepInput';
+import './../styles/recipeinput.css';
 
-const RecipeInput = ({ parentState, setParentState }) => {
-    const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = parentState;
+const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState }) => {
+    const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = addEditRecipeState;
     
     const handleInput = (e) => {
         const {name, value} = e.target;
-        setParentState((prevState) => ({
+        setAddEditRecipeState((prevState) => ({
             ...prevState,
             [name]: value,
         }));
     }
 
     const togglePublic = () => {
-        setParentState({...parentState, publicRecipe: !publicRecipe})
+        setAddEditRecipeState({...addEditRecipeState, publicRecipe: !publicRecipe})
     }
+
+    // take steps JSON and map it to Step component.
+    // worry about this for edit, since add has none.
     
     return (
         <Form className="add-recipe-form">
@@ -131,14 +135,24 @@ const RecipeInput = ({ parentState, setParentState }) => {
             </Form.Group>
             <Form.Group controlId="yieldName">
                 <Form.Control 
-                    name="yieldQuantity"
+                    name="yieldName"
                     type="number"
-                    value={yieldQuantity}
-                    placeholder="Amount"
+                    value={yieldName}
+                    placeholder="cookies, loaves, etc"
                     required
                     onChange={handleInput}
                 />
             </Form.Group>
+            
+            {/* insert steps list here with list of Step components. starts at 0 so only input is showing. */}
+            <StepInput addEditRecipeState={addEditRecipeState} setAddEditRecipeState={setAddEditRecipeState}/>
+
+            <Form.Group>
+                <Form.Text>Personal Notes</Form.Text> 
+                <Form.Control 
+                    type="textarea"/>
+            </Form.Group>
+            <Button variant="success">Save this Recipe!</Button>
         </Form>
     )
 }
