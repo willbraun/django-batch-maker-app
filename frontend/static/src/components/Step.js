@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import StepIngredient from './StepIngredient';
 
-const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, start, number, ingredients, directions}) => {
-    const isEditing = start
+const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, isEditing, number, ingredients, directions}) => {
     const [ingUid, setIngUid] = useState(0);
     const [state, setState] = useState({
         id: stepUid,
@@ -38,43 +39,41 @@ const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, s
         setAddEditRecipeState({...addEditRecipeState, steps: newList});
     }
 
-
-
     const ingredientList = state.ingredients.map((ingredient, i) => 
         <StepIngredient 
             key={i} 
             {...ingredient} 
-            StepState={state} 
+            stepState={state} 
             setStepState={setState} 
-            start={false}
+            isEditing={false}
         />)
     
     return (
         <section>
             <p>Step {state.number}</p>
+
             {ingredientList}
             <StepIngredient 
                 key={ingredientList.length + 1} 
                 stepState={state} 
                 setStepState={setState} 
-                start={true}
+                isEditing={true}
                 ingUid={ingUid}
                 setIngUid={setIngUid} />
 
-            <div>
-                <label htmlFor="directions"></label>
-                <textarea 
+            <Form.Group controlId="directions">
+                <Form.Control 
+                    as="textarea" 
+                    rows={3}
                     name="directions"
-                    id="directions"
                     value={state.directions}
-                    type="text" 
                     placeholder="What directions go with this step?"
-                    required
                     onChange={handleInput} />
-            </div>
+            </Form.Group>
+
             {isEditing ?
-                <button type="button" onClick={() => addStep()}>Add another step</button> :
-                <button type="button" onClick={() => deleteStep()}>Delete step</button>
+                <Button className="btn btn-secondary" type="button" onClick={() => addStep()}>Add another step</Button> :
+                <Button className="btn" type="button" onClick={() => deleteStep()}>Delete step</Button>
             }
         </section>
     )

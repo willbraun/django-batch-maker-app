@@ -18,19 +18,19 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
         setAddEditRecipeState({...addEditRecipeState, publicRecipe: !publicRecipe})
     }
 
-    // take steps JSON and map it to Step component.
     const stepList = addEditRecipeState.steps.map((step, i) => 
         <Step 
             key={i}   
             {...step} 
             addEditRecipeState={addEditRecipeState} 
             setAddEditRecipeState={setAddEditRecipeState}
-            start={false}
+            isEditing={false}
         />)
 
     
     return (
         <Form className="add-recipe-form">
+            <p>Basic Info</p>
             <Form.Group className="mb-3" controlId="image">
                 <Form.Label className="upload-recipe-image">
                     <Form.Control type="file" />
@@ -159,13 +159,16 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 setAddEditRecipeState={setAddEditRecipeState} 
                 stepUid={stepUid}
                 setStepUid={setStepUid} 
-                start={true}
+                isEditing={true}
             />
 
+            <p>Personal Notes</p>
             <Form.Group>
-                <Form.Text>Personal Notes</Form.Text> 
                 <Form.Control 
-                    type="textarea"/>
+                    as="textarea"
+                    rows={3}
+                    value={addEditRecipeState.notes}
+                    onChange={handleInput}/>
             </Form.Group>
             <Button variant="success">Save this Recipe!</Button>
         </Form>

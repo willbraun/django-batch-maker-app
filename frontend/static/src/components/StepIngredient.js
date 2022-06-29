@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { units } from './../data';
 
-const StepIngredient = ({stepState, setStepState, start, ingUid, setIngUid, amount, unit, name}) => {    
-    const isEditing = start;
+const StepIngredient = ({stepState, setStepState, isEditing, ingUid, setIngUid, amount, unit, name}) => {
     const [state, setState] = useState({
         id: ingUid,
         amount: amount ? amount : '',
@@ -47,9 +48,8 @@ const StepIngredient = ({stepState, setStepState, start, ingUid, setIngUid, amou
     
     return (
         <article>
-            <div>
-                <label htmlFor="amount"></label>
-                <input 
+            <Form.Group>
+                <Form.Control 
                     name="amount"
                     id="amount"
                     value={state.amount}
@@ -58,21 +58,19 @@ const StepIngredient = ({stepState, setStepState, start, ingUid, setIngUid, amou
                     placeholder="Amount"
                     required
                     onChange={handleInput} />
-            </div>
-            <div>
-                <label htmlFor="unit"></label>
-                <select 
+            </Form.Group>
+            <Form.Group>
+                <Form.Select 
                     name="unit" 
                     id="unit"
                     value={state.unit}  
                     onChange={handleInput}> 
                         <option value="">Unit</option>
                         {unitList}
-                </select>
-            </div>
-            <div>
-                <label htmlFor="name"></label>
-                <input 
+                </Form.Select>
+            </Form.Group>
+            <Form.Group>
+                <Form.Control 
                     name="name"
                     id="name"
                     value={state.name}
@@ -80,10 +78,10 @@ const StepIngredient = ({stepState, setStepState, start, ingUid, setIngUid, amou
                     placeholder="Ingredient"
                     required
                     onChange={handleInput} />
-            </div>
+            </Form.Group>
             {isEditing ? 
-                <button type="button" onClick={() => addIngredient()}>+</button> :
-                <button type="button" onClick={() => deleteIngredient()}>-</button> 
+                <Button variant="outline-secondary" type="button" onClick={() => addIngredient()}>+</Button> :
+                <Button variant="outline-secondary" type="button" onClick={() => deleteIngredient()}>-</Button> 
             }
         </article>
     )
