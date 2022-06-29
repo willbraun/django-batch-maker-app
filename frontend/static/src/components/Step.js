@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import StepIngredient from './StepIngredient';
 
 const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, isEditing, number, ingredients, directions}) => {
@@ -49,8 +51,11 @@ const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, i
         />)
     
     return (
-        <section>
-            <p>Step {state.number}</p>
+        <section className="step">
+            <div className="text-row">
+                <p>Step {state.number}</p>
+                <div className="divider"></div>
+            </div>
 
             {ingredientList}
             <StepIngredient 
@@ -61,7 +66,7 @@ const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, i
                 ingUid={ingUid}
                 setIngUid={setIngUid} />
 
-            <Form.Group controlId="directions">
+            <Form.Group className="mb-3" controlId="directions">
                 <Form.Control 
                     as="textarea" 
                     rows={3}
@@ -70,11 +75,12 @@ const Step = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, i
                     placeholder="What directions go with this step?"
                     onChange={handleInput} />
             </Form.Group>
-
-            {isEditing ?
-                <Button className="btn btn-secondary" type="button" onClick={() => addStep()}>Add another step</Button> :
-                <Button className="btn" type="button" onClick={() => deleteStep()}>Delete step</Button>
-            }
+            <Col className="right-button">
+                {isEditing ?
+                    <Button className="btn btn-secondary" type="button" onClick={() => addStep()}>Add another step</Button> :
+                    <Button className="btn btn-secondary" type="button" onClick={() => deleteStep()}>Delete step</Button>
+                }
+            </Col>
         </section>
     )
 }

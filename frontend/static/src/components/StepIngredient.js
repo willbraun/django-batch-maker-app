@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { units } from './../data';
 
 const StepIngredient = ({stepState, setStepState, isEditing, ingUid, setIngUid, amount, unit, name}) => {
@@ -47,43 +49,51 @@ const StepIngredient = ({stepState, setStepState, isEditing, ingUid, setIngUid, 
     const unitList = units.filter(unit => unit.measureIngredient).map(unit => <option key={unit.id} value={unit.id}>{unit.name}s</option>);
     
     return (
-        <article>
-            <Form.Group>
-                <Form.Control 
-                    name="amount"
-                    id="amount"
-                    value={state.amount}
-                    type="number" 
-                    min="0"
-                    placeholder="Amount"
-                    required
-                    onChange={handleInput} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Select 
-                    name="unit" 
-                    id="unit"
-                    value={state.unit}  
-                    onChange={handleInput}> 
-                        <option value="">Unit</option>
-                        {unitList}
-                </Form.Select>
-            </Form.Group>
-            <Form.Group>
-                <Form.Control 
-                    name="name"
-                    id="name"
-                    value={state.name}
-                    type="text" 
-                    placeholder="Ingredient"
-                    required
-                    onChange={handleInput} />
-            </Form.Group>
-            {isEditing ? 
-                <Button variant="outline-secondary" type="button" onClick={() => addIngredient()}>+</Button> :
-                <Button variant="outline-secondary" type="button" onClick={() => deleteIngredient()}>-</Button> 
-            }
-        </article>
+        <Row className="mb-3 gx-3 ingredient">
+            <Col xs={2}>
+                <Form.Group>
+                    <Form.Control 
+                        name="amount"
+                        id="amount"
+                        value={state.amount}
+                        type="number" 
+                        min="0"
+                        placeholder="Amount"
+                        required
+                        onChange={handleInput} />
+                </Form.Group>
+            </Col>
+            <Col xs={4}>
+                <Form.Group>
+                    <Form.Select 
+                        name="unit" 
+                        id="unit"
+                        value={state.unit}  
+                        onChange={handleInput}> 
+                            <option value="">Unit</option>
+                            {unitList}
+                    </Form.Select>
+                </Form.Group>
+            </Col>
+            <Col xs={5}>
+                <Form.Group>
+                    <Form.Control 
+                        name="name"
+                        id="name"
+                        value={state.name}
+                        type="text" 
+                        placeholder="Ingredient"
+                        required
+                        onChange={handleInput} />
+                </Form.Group>
+            </Col>
+            <Col xs={1}>
+                {isEditing ? 
+                    <Button variant="outline-secondary" type="button" onClick={() => addIngredient()}>+</Button> :
+                    <Button variant="outline-secondary" type="button" onClick={() => deleteIngredient()}>-</Button> 
+                }
+            </Col>
+        </Row>
     )
 }
 

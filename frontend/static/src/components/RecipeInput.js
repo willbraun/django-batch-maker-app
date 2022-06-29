@@ -46,28 +46,28 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
             setAddEditRecipeState={setAddEditRecipeState}
             isEditing={false}
         />)
-
-    const imageInput = document.querySelector('.recipe-input-image');
     
     return (
         <Form className="add-recipe-form">
-            <p>Basic Info</p>
+            <div className="text-row">
+                <p>Basic Info</p>
+                <div className="divider"></div>
+            </div>
             <Row>
                 <Col xs={3}>
                     <Form.Group className="mb-3" controlId="image">
                         <button 
                             type="button" 
                             className="recipe-image-button"
-                            onClick={() => imageInput.click()}>
+                            onClick={() => document.querySelector('.recipe-input-image').click()}>
                             <Form.Control 
                                 type="file"
                                 className="recipe-input-image"
-                                style={{display: 'none'}}
                                 onChange={handleImage} />
                             
                             {preview ? 
                                 <img className="image-button-background" src={preview} alt={title}/> : 
-                                <div class="no-image-background">
+                                <div className="no-image-background">
                                     <img className="plus" src={plus} alt="plus icon" />
                                     <p>Add Photo</p>
                                 </div>}
@@ -127,7 +127,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 </Col>
             </Row>
             <Row className="time-temp-row gx-2" >
-                <Col xs={5}>
+                <Col xs={4}>
                     <Form.Group className="mb-3" controlId="recipeType">
                         <Form.Select 
                             name="recipeType"
@@ -168,7 +168,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                         />
                     </Form.Group>
                 </Col>
-                <Col xs={3}>
+                <Col xs={4}>
                     <InputGroup className="mb-3">
                         <Form.Control 
                             className="w-50"
@@ -178,9 +178,9 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                             placeholder="Cook Temp"
                             required
                             onChange={handleInput}
-                        />
+                            />
                         <Form.Select
-                            name="recipeType"
+                            name="tempUnit"
                             required 
                             value={tempUnit}
                             onChange={handleInput}>
@@ -189,35 +189,6 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                         </Form.Select>
                     </InputGroup>
                 </Col>
-
-                {/* <Col xs={2}>
-                    <Form.Group className="mb-3" controlId="cookTemp">
-                        <Form.Control 
-                            name="cookTemp"
-                            type="number"
-                            value={cookTemp}
-                            placeholder="Cook Temp"
-                            required
-                            onChange={handleInput}
-                        />
-                    </Form.Group>
-                </Col>
-                <Col xs={1}>
-                    
-
-
-                    <Form.Group className="mb-3" controlId="tempUnit">
-                        <Form.Select
-                            name="recipeType"
-                            required 
-                            value={tempUnit}
-                            onChange={handleInput}>
-                                <option value="FA">ºF</option>
-                                <option value="CE">ºC</option>
-                        </Form.Select>
-                    </Form.Group>
-                </Col> */}
-
             </Row>
 
             <Row className="gx-3">
@@ -262,15 +233,20 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 isEditing={true}
             />
 
-            <p>Personal Notes</p>
-            <Form.Group>
+            <div className="text-row">
+                <p>Personal Notes</p>
+                <div className="divider"></div>
+            </div>
+            <Form.Group className="mb-3">
                 <Form.Control 
                     as="textarea"
                     rows={3}
                     value={notes}
                     onChange={handleInput}/>
             </Form.Group>
-            <Button variant="success" type="submit">Save this Recipe!</Button>
+            <Col className="right-button">
+                <Button variant="success"  type="submit">Save this Recipe!</Button>
+            </Col>
         </Form>
     )
 }

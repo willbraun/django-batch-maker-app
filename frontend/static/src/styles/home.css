@@ -5,9 +5,27 @@
 .add-recipe-box {
     width: var(--recipe-preview-size);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--light-grey);
     border-radius: 5px;
     margin: 0 1rem 1rem 0;
+    text-decoration: none;
+    color: #000;
+    transition: 0.3s;
+}
+
+.add-recipe-box img {
+    width: 30%;
+}
+
+.add-recipe-box p {
+    font-size: 1.2vw;
+    margin: 0;
+}
+
+.add-recipe-box:hover {
+    color: #000;
+    filter: brightness(90%);
 }

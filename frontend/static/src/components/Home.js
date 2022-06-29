@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { handleError } from '../helpers';
 import RecipePreview from './RecipePreview';
+import plus from './../images/plus-solid.svg'
 import './../styles/home.css'
 
 const Home = () => {
@@ -46,7 +47,8 @@ const Home = () => {
                 <h3>My Recipes</h3>
                 <div className="home-row">
                     <Link to={'my-recipes/add/'} className="add-recipe-box">
-                        Add Recipe
+                        <img src={plus} alt="plus icon" />
+                        <p>Add Recipe</p>
                     </Link>
                     {myRecipesHomeList}
                 </div>

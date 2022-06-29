@@ -1,7 +1,29 @@
 .add-recipe-form {
     width: 50%;
     margin: auto;
-    padding: 2rem 0;
+    padding: 1rem 0;
+}
+
+.add-recipe-form .text-row {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.add-recipe-form .text-row p {
+    margin: 0 1rem 0 0;
+}
+
+.add-recipe-form .text-row .divider {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #000;
+}
+
+.recipe-input-image {
+    position: absolute;
+    width: 0;
+    visibility: hidden;
 }
 
 .recipe-image-button {
@@ -9,11 +31,13 @@
     height: 10vw;
     border: none;
     border-radius: 5px;
-    background-color: #999;
+    background-color: var(--light-grey);
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.3s;
+    padding: 0;
+    overflow: hidden;
 }
 
 .recipe-image-button:hover {
@@ -21,6 +45,8 @@
 }
 
 .recipe-image-button img {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -29,11 +55,11 @@
 }
 
 .no-image-background img {
-    width: 50%;
+    width: 30%;
 }
 
 .no-image-background p {
-    font-size: 1.5vw;
+    font-size: 1.2vw;
     margin: 0;
 }
 
@@ -50,4 +76,14 @@
 input::placeholder,
 select::placeholder {
     overflow: visible;
+}
+
+.right-button {
+    text-align: right;
+}
+
+.ingredient button {
+    border-color: #C7CED4;
+    width: 100%;
+    font-weight: 700;
 }
