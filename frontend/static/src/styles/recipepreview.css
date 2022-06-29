@@ -1,5 +1,6 @@
 .recipe-preview {
     margin: 0 1rem 1rem 0;
+    overflow: hidden;
 }
 
 .img-box {

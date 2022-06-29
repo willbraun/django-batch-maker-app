@@ -18,10 +18,23 @@ const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit,
     };
 
     const addIngredient = () => {
-        const ingredients = stepInputState.ingredients;
-        const newList = ingredients.push(state);
-        setStepInputState({...stepInputState, ingredients: newList});
-        setIsEditing(false);
+        const keys = Object.keys(state);
+        const values = Object.values(state);
+        if (!values.includes('')) {
+            const newList = stepInputState.ingredients;
+            newList.push(state);
+            setStepInputState({...stepInputState, ingredients: newList});
+            setIsEditing(false);
+        }
+        else {
+            const missingKeys = keys
+                .filter(key => state[key] === '')
+                .map(key => key.toString())
+                .join(', ')
+            alert(`Ingredient is missing: ${missingKeys}`)
+        }
+
+        
     }
 
     const unitList = units.filter(unit => unit.measureIngredient).map(unit => <option key={unit.id} value={unit.id}>{unit.name}s</option>);
