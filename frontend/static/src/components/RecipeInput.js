@@ -3,6 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Step from './Step';
 import './../styles/recipeinput.css';
 import plus from './../images/plus-solid.svg'
@@ -51,7 +54,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
             <p>Basic Info</p>
             <Row>
                 <Col xs={3}>
-                    <Form.Group controlId="image">
+                    <Form.Group className="mb-3" controlId="image">
                         <button 
                             type="button" 
                             className="recipe-image-button"
@@ -73,7 +76,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 </Col>
                 <Col xs={9}>
                     <Row>
-                        <Form.Group controlId="title">
+                        <Form.Group className="mb-3" controlId="title">
                             <Form.Control 
                                 name="title"
                                 type="text"
@@ -85,7 +88,7 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group controlId="by">
+                        <Form.Group className="mb-3" controlId="by">
                             <Form.Control 
                                 name="by"
                                 type="text"
@@ -97,83 +100,125 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group controlId="public">
-                            <Form.Check 
-                                name="public"
-                                type="checkbox"
-                                checked={publicRecipe}
-                                onChange={togglePublic}
-                                />
-                            <Form.Label>Make it Public</Form.Label>
-                        </Form.Group>
+                        <Col className="checkbox">
+                            <Form.Group className="mb-3" controlId="public">
+                                <Form.Check 
+                                    name="public"
+                                    type="checkbox"
+                                    checked={publicRecipe}
+                                    onChange={togglePublic}
+                                    />
+                                <Form.Label>Make it Public</Form.Label>
+                            </Form.Group>
+                        </Col>
+                        <Col className="checkbox">
+                            <Form.Group className="mb-3" controlId="private">
+                                <Form.Check 
+                                    name="private"
+                                    type="checkbox"
+                                    checked={!publicRecipe}
+                                    onChange={togglePublic}
+                                    />
+                                <Form.Label>Keep it Private</Form.Label>
+                            </Form.Group>
+                        </Col>
                     </Row>
                 
                 </Col>
             </Row>
-            <Form.Group controlId="private">
-                <Form.Check 
-                    name="private"
-                    type="checkbox"
-                    checked={!publicRecipe}
-                    onChange={togglePublic}
-                    />
-                <Form.Label>Keep it Private</Form.Label>
-            </Form.Group>
-            <Form.Group controlId="recipeType">
-                <Form.Select 
-                    name="recipeType"
-                    required 
-                    value={recipeType}
-                    onChange={handleInput}>
-                        <option>Recipe Type</option>
-                        <option value="BR">Breakfast</option>
-                        <option value="LU">Lunch</option>
-                        <option value="DI">Dinner</option>
-                        <option value="DE">Dessert</option>
-                </Form.Select>
-            </Form.Group>
-            <Form.Group controlId="prepTime">
-                <Form.Control 
-                    name="prepTime"
-                    type="number"
-                    min="0"
-                    value={prepTime}
-                    placeholder="Prep Time (min)"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
-            <Form.Group controlId="cookTime">
-                <Form.Control 
-                    name="cookTime"
-                    type="number"
-                    min="0"
-                    value={cookTime}
-                    placeholder="Cook Time (min)"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
-            <Form.Group controlId="cookTemp">
-                <Form.Control 
-                    name="cookTemp"
-                    type="number"
-                    value={cookTemp}
-                    placeholder="Cook Temp"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
-            <Form.Group controlId="tempUnit">
-                <Form.Select
-                    name="recipeType"
-                    required 
-                    value={tempUnit}
-                    onChange={handleInput}>
-                        <option value="FA">ºF</option>
-                        <option value="CE">ºC</option>
-                </Form.Select>
-            </Form.Group>
+            <Row className="time-temp-row gx-2" >
+                <Col xs={5}>
+                    <Form.Group className="mb-3" controlId="recipeType">
+                        <Form.Select 
+                            name="recipeType"
+                            required 
+                            value={recipeType}
+                            onChange={handleInput}>
+                                <option>Recipe Type</option>
+                                <option value="BR">Breakfast</option>
+                                <option value="LU">Lunch</option>
+                                <option value="DI">Dinner</option>
+                                <option value="DE">Dessert</option>
+                        </Form.Select>
+                    </Form.Group>
+                </Col>
+                <Col xs={2}>
+                    <Form.Group className="mb-3" controlId="prepTime">
+                        <Form.Control 
+                            name="prepTime"
+                            type="number"
+                            min="0"
+                            value={prepTime}
+                            placeholder="Prep Time"
+                            required
+                            onChange={handleInput}
+                        />
+                    </Form.Group>
+                </Col>
+                <Col xs={2}>
+                    <Form.Group className="mb-3" controlId="cookTime">
+                        <Form.Control 
+                            name="cookTime"
+                            type="number"
+                            min="0"
+                            value={cookTime}
+                            placeholder="Cook Time"
+                            required
+                            onChange={handleInput}
+                        />
+                    </Form.Group>
+                </Col>
+                <Col xs={3}>
+                    <InputGroup className="mb-3">
+                        <Form.Control 
+                            className="w-50"
+                            name="cookTemp"
+                            type="number"
+                            value={cookTemp}
+                            placeholder="Cook Temp"
+                            required
+                            onChange={handleInput}
+                        />
+                        <Form.Select
+                            name="recipeType"
+                            required 
+                            value={tempUnit}
+                            onChange={handleInput}>
+                                <option value="FA">ºF</option>
+                                <option value="CE">ºC</option>
+                        </Form.Select>
+                    </InputGroup>
+                </Col>
+
+                {/* <Col xs={2}>
+                    <Form.Group className="mb-3" controlId="cookTemp">
+                        <Form.Control 
+                            name="cookTemp"
+                            type="number"
+                            value={cookTemp}
+                            placeholder="Cook Temp"
+                            required
+                            onChange={handleInput}
+                        />
+                    </Form.Group>
+                </Col>
+                <Col xs={1}>
+                    
+
+
+                    <Form.Group className="mb-3" controlId="tempUnit">
+                        <Form.Select
+                            name="recipeType"
+                            required 
+                            value={tempUnit}
+                            onChange={handleInput}>
+                                <option value="FA">ºF</option>
+                                <option value="CE">ºC</option>
+                        </Form.Select>
+                    </Form.Group>
+                </Col> */}
+
+            </Row>
             <Form.Text>This recipe will make</Form.Text>
             <Form.Group controlId="yieldQuantity">
                 <Form.Control 

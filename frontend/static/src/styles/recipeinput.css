@@ -36,3 +36,18 @@
     font-size: 1.5vw;
     margin: 0;
 }
+
+.add-recipe-form .checkbox > div > div {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.time-temp-row input,
+.time-temp-row select {
+    font-size: 0.8rem;
+}
+
+input::placeholder,
+select::placeholder {
+    overflow: visible;
+}
