@@ -32,6 +32,7 @@ class Recipe(models.Model):
     
     title = models.CharField(max_length=255)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    by = models.CharField(max_length=255)
     image = models.ImageField(upload_to='recipes/images/')
     public = models.BooleanField()
     recipe_type = models.CharField(max_length=2, choices=TYPES)
@@ -42,6 +43,7 @@ class Recipe(models.Model):
     # temp_unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
     yield_quantity = models.FloatField()
     yield_name = models.CharField(max_length=255)
+    steps = models.JSONField(null=True)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     shares = models.PositiveIntegerField(default=0, blank=True)
