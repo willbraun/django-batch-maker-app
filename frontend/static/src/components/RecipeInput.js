@@ -219,27 +219,38 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
                 </Col> */}
 
             </Row>
-            <Form.Text>This recipe will make</Form.Text>
-            <Form.Group controlId="yieldQuantity">
-                <Form.Control 
-                    name="yieldQuantity"
-                    type="number"
-                    value={yieldQuantity}
-                    placeholder="Amount"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
-            <Form.Group controlId="yieldName">
-                <Form.Control 
-                    name="yieldName"
-                    type="number"
-                    value={yieldName}
-                    placeholder="cookies, loaves, etc"
-                    required
-                    onChange={handleInput}
-                />
-            </Form.Group>
+
+            <Row className="gx-3">
+                <Col xs={3}>
+                    <Form.Text>This recipe will make</Form.Text>
+                </Col>                
+                <Col xs={2}>
+                    <Form.Group controlId="yieldQuantity">
+                        <Form.Control 
+                            name="yieldQuantity"
+                            type="number"
+                            min="0"
+                            value={yieldQuantity}
+                            placeholder="Amount"
+                            required
+                            onChange={handleInput}
+                        />
+                    </Form.Group>
+                </Col>
+                <Col xs={7}>
+                    <Form.Group controlId="yieldName">
+                        <Form.Control 
+                            name="yieldName"
+                            type="text"
+                            value={yieldName}
+                            placeholder="cookies, loaves, etc"
+                            required
+                            onChange={handleInput}
+                        />
+                    </Form.Group>
+                </Col>
+
+            </Row>
             
             {stepList}
             <Step  
