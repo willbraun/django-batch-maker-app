@@ -22,7 +22,6 @@ const AddRecipe = () => {
     
     return (
         <main>
-            <div>Temporary - add form</div>
             <RecipeInput parentState={state} setParentState={setState}/>
         </main>
     )

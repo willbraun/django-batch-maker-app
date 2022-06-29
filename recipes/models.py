@@ -38,7 +38,7 @@ class Recipe(models.Model):
     recipe_type = models.CharField(max_length=2, choices=TYPES)
     prep_time = models.PositiveIntegerField()
     cook_time = models.PositiveIntegerField()
-    cook_temp = models.PositiveIntegerField()
+    cook_temp = models.IntegerField()
     temp_unit = models.CharField(max_length=2, choices=TEMP_UNITS)
     # temp_unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
     yield_quantity = models.FloatField()
