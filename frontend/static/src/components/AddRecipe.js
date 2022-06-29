@@ -11,7 +11,7 @@ const AddRecipe = () => {
         prepTime: '',
         cookTime: '',
         cookTemp: '',
-        tempUnit: '',
+        tempUnit: 'FA',
         yieldQuantity: '',
         yieldName: '',
         steps: {},

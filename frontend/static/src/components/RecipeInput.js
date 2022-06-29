@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import './../styles/recipeinput.css'
 
 const RecipeInput = ({ parentState, setParentState }) => {
-    const { image, title, by, publicRecipe, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = parentState;
+    const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = parentState;
     
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -64,12 +64,16 @@ const RecipeInput = ({ parentState, setParentState }) => {
                 <Form.Label>Keep it Private</Form.Label>
             </Form.Group>
             <Form.Group controlId="recipeType">
-                <Form.Select required>
-                    <option>Recipe Type</option>
-                    <option value="BR">Breakfast</option>
-                    <option value="LU">Lunch</option>
-                    <option value="DI">Dinner</option>
-                    <option value="DE">Dessert</option>
+                <Form.Select 
+                    name="recipeType"
+                    required 
+                    value={recipeType}
+                    onChange={handleInput}>
+                        <option>Recipe Type</option>
+                        <option value="BR">Breakfast</option>
+                        <option value="LU">Lunch</option>
+                        <option value="DI">Dinner</option>
+                        <option value="DE">Dessert</option>
                 </Form.Select>
             </Form.Group>
             <Form.Group controlId="prepTime">
@@ -105,10 +109,35 @@ const RecipeInput = ({ parentState, setParentState }) => {
                 />
             </Form.Group>
             <Form.Group controlId="tempUnit">
-                <Form.Select>
-                    <option value="FA">ºF</option>
-                    <option value="CE">ºC</option>
+                <Form.Select
+                    name="recipeType"
+                    required 
+                    value={recipeType}
+                    onChange={handleInput}>
+                        <option value="FA">ºF</option>
+                        <option value="CE">ºC</option>
                 </Form.Select>
+            </Form.Group>
+            <Form.Text>This recipe will make</Form.Text>
+            <Form.Group controlId="yieldQuantity">
+                <Form.Control 
+                    name="yieldQuantity"
+                    type="number"
+                    value={yieldQuantity}
+                    placeholder="Amount"
+                    required
+                    onChange={handleInput}
+                />
+            </Form.Group>
+            <Form.Group controlId="yieldName">
+                <Form.Control 
+                    name="yieldQuantity"
+                    type="number"
+                    value={yieldQuantity}
+                    placeholder="Amount"
+                    required
+                    onChange={handleInput}
+                />
             </Form.Group>
         </Form>
     )
