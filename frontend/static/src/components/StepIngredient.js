@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { units } from './../data';
 
-const StepIngredient = ({stepInputState, setStepInputState}) => {
-    const [isEditing, setIsEditing] = useState(true);
+const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit, name}) => {
+    const [isEditing, setIsEditing] = useState(start);
     const [state, setState] = useState({
-        amount: '',
-        unit: '',
-        name: '',
+        amount: amount ? amount : '',
+        unit: unit ? unit : '',
+        name: name ? name : '',
     });
     
     const handleInput = (e) => {
@@ -17,15 +17,22 @@ const StepIngredient = ({stepInputState, setStepInputState}) => {
         }));
     };
 
-    const unitList = units.filter(unit => unit.measureIngredient).map(unit => <option value={unit.id}>{unit.name}s</option>);
+    const addIngredient = () => {
+        const ingredients = stepInputState.ingredients;
+        const newList = ingredients.push(state);
+        setStepInputState({...stepInputState, ingredients: newList});
+        setIsEditing(false);
+    }
+
+    const unitList = units.filter(unit => unit.measureIngredient).map(unit => <option key={unit.id} value={unit.id}>{unit.name}s</option>);
     
     return (
         <article>
             <div>
-                <label htmlFor="ingredient-amount"></label>
+                <label htmlFor="amount"></label>
                 <input 
-                    name="ingredient-amount"
-                    id="ingredient-amount"
+                    name="amount"
+                    id="amount"
                     value={state.amount}
                     type="number" 
                     min="0"
@@ -34,10 +41,10 @@ const StepIngredient = ({stepInputState, setStepInputState}) => {
                     onChange={handleInput} />
             </div>
             <div>
-                <label htmlFor="ingredient-unit"></label>
+                <label htmlFor="unit"></label>
                 <select 
-                    name="ingredient-unit" 
-                    id="ingredient-unit"
+                    name="unit" 
+                    id="unit"
                     value={state.unit}  
                     onChange={handleInput}> 
                         <option value="">Unit</option>
@@ -45,10 +52,10 @@ const StepIngredient = ({stepInputState, setStepInputState}) => {
                 </select>
             </div>
             <div>
-                <label htmlFor="ingredient-name"></label>
+                <label htmlFor="name"></label>
                 <input 
-                    name="ingredient-name"
-                    id="ingredient-name"
+                    name="name"
+                    id="name"
                     value={state.name}
                     type="text" 
                     placeholder="Ingredient"
@@ -56,8 +63,9 @@ const StepIngredient = ({stepInputState, setStepInputState}) => {
                     onChange={handleInput} />
             </div>
             {isEditing ? 
-                <button type="button">+</button> :
-                <button type="button">-</button>
+                <button type="button" onClick={() => addIngredient()}>+</button> :
+                <button type="button">-</button> 
+                // if minus is clicked, DELETE ingredient component
             }
         </article>
     )
