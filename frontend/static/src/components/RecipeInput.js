@@ -3,9 +3,9 @@ import Form from 'react-bootstrap/Form';
 import StepInput from './StepInput';
 import './../styles/recipeinput.css';
 
-const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState }) => {
+const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid }) => {
     const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = addEditRecipeState;
-    
+
     const handleInput = (e) => {
         const {name, value} = e.target;
         setAddEditRecipeState((prevState) => ({
@@ -19,7 +19,15 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState }) => {
     }
 
     // take steps JSON and map it to Step component.
-    // worry about this for edit, since add has none.
+    const stepList = addEditRecipeState.steps.map((step, i) => 
+        <StepInput 
+            key={i}   
+            {...step} 
+            addEditRecipeState={addEditRecipeState} 
+            setAddEditRecipeState={setAddEditRecipeState}
+            start={false}
+        />)
+
     
     return (
         <Form className="add-recipe-form">
@@ -144,8 +152,15 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState }) => {
                 />
             </Form.Group>
             
-            {/* insert steps list here with list of Step components. start = false */}
-            <StepInput addEditRecipeState={addEditRecipeState} setAddEditRecipeState={setAddEditRecipeState} start={true}/>
+            {stepList}
+            <StepInput  
+                key={steps.length + 1}
+                addEditRecipeState={addEditRecipeState} 
+                setAddEditRecipeState={setAddEditRecipeState} 
+                stepUid={stepUid}
+                setStepUid={setStepUid} 
+                start={true}
+            />
 
             <Form.Group>
                 <Form.Text>Personal Notes</Form.Text> 

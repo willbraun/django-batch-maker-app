@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import StepIngredient from './StepIngredient';
 
-const StepInput = ({addEditRecipeState, setAddEditRecipeState, start}) => {
+const StepInput = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, start, number, ingredients, directions}) => {
     const [isEditing, setIsEditing] = useState(start);
-    const [uid, setUid] = useState(0);
+    const [ingUid, setIngUid] = useState(0);
     const [state, setState] = useState({
-        number: addEditRecipeState.steps.length + 1,
-        ingredients: [],
-        directions: '',
+        id: stepUid,
+        number: number ? number : addEditRecipeState.steps.length + 1,
+        ingredients: ingredients ? ingredients : [],
+        directions: directions ? directions : '',
     })
 
     const handleInput = (e) => {
@@ -22,9 +23,17 @@ const StepInput = ({addEditRecipeState, setAddEditRecipeState, start}) => {
         const newList = addEditRecipeState.steps;
         newList.push(state)
         setAddEditRecipeState({...addEditRecipeState, steps: newList});
+        setStepUid(stepUid + 1);
     }
 
-    const ingredientList = state.ingredients.map((ingredient, i) => <StepIngredient key={i} {...ingredient} stepInputState={state} setStepInputState={setState} start={false}/>)
+    const ingredientList = state.ingredients.map((ingredient, i) => 
+        <StepIngredient 
+            key={i} 
+            {...ingredient} 
+            stepInputState={state} 
+            setStepInputState={setState} 
+            start={false}
+        />)
     
     return (
         <section>
@@ -35,21 +44,24 @@ const StepInput = ({addEditRecipeState, setAddEditRecipeState, start}) => {
                 stepInputState={state} 
                 setStepInputState={setState} 
                 start={true}
-                uid={uid}
-                setUid={setUid} />
+                ingUid={ingUid}
+                setIngUid={setIngUid} />
 
             <div>
-                <label htmlFor="step-description"></label>
+                <label htmlFor="directions"></label>
                 <textarea 
-                    name="step-description"
-                    id="step-description"
-                    value={state.description}
+                    name="directions"
+                    id="directions"
+                    value={state.directions}
                     type="text" 
                     placeholder="What directions go with this step?"
                     required
                     onChange={handleInput} />
             </div>
-            <button type="button" onClick={() => addStep()}>Add another step</button>
+            {isEditing ?
+                <button type="button" onClick={() => addStep()}>Add another step</button> :
+                <button type="button" >Delete step</button>
+            }
         </section>
     )
 }

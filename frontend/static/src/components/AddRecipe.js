@@ -19,10 +19,15 @@ const AddRecipe = () => {
     }
     
     const [state, setState] = useState(blank);
+    const [stepUid, setStepUid] = useState(state.steps.length);
     
     return (
         <main>
-            <RecipeInput addEditRecipeState={state} setAddEditRecipeState={setState}/>
+            <RecipeInput 
+                addEditRecipeState={state} 
+                setAddEditRecipeState={setState}
+                stepUid={stepUid}
+                setStepUid={setStepUid}/>
         </main>
     )
 }

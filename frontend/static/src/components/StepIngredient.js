@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { units } from './../data';
 
-const StepIngredient = ({stepInputState, setStepInputState, start, uid, setUid, amount, unit, name}) => {    
+const StepIngredient = ({stepInputState, setStepInputState, start, ingUid, setIngUid, amount, unit, name}) => {    
     const [isEditing, setIsEditing] = useState(start);
     const [state, setState] = useState({
-        id: uid,
+        id: ingUid,
         amount: amount ? amount : '',
         unit: unit ? unit : '',
         name: name ? name : '',
@@ -25,7 +25,7 @@ const StepIngredient = ({stepInputState, setStepInputState, start, uid, setUid, 
             const newList = stepInputState.ingredients;
             newList.push(state);
             setStepInputState({...stepInputState, ingredients: newList});
-            setUid(uid + 1)
+            setIngUid(ingUid + 1)
             setIsEditing(false);
         }
         else {
