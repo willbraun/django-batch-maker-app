@@ -6,6 +6,7 @@ const StepInput = ({addEditRecipeState, setAddEditRecipeState}) => {
         number: addEditRecipeState.steps.length + 1,
         ingredients: [],
         directions: '',
+        uid: 0,
     })
 
     const handleInput = (e) => {

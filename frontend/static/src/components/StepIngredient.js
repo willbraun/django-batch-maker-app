@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { units } from './../data';
 
-const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit, name}) => {
+const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit, name}) => {    
     const [isEditing, setIsEditing] = useState(start);
     const [state, setState] = useState({
+        id: stepInputState.uid,
         amount: amount ? amount : '',
         unit: unit ? unit : '',
         name: name ? name : '',
@@ -23,7 +24,7 @@ const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit,
         if (!values.includes('')) {
             const newList = stepInputState.ingredients;
             newList.push(state);
-            setStepInputState({...stepInputState, ingredients: newList});
+            setStepInputState({...stepInputState, ingredients: newList, uid: stepInputState.uid + 1});
             setIsEditing(false);
         }
         else {
@@ -33,8 +34,13 @@ const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit,
                 .join(', ')
             alert(`Ingredient is missing: ${missingKeys}`)
         }
+    }
 
-        
+    const deleteIngredient = () => {
+        const newList = stepInputState.ingredients;
+        const index = newList.findIndex(ingredient => ingredient.id === state.id)
+        newList.splice(index, 1);
+        setStepInputState({...stepInputState, ingredients: newList});
     }
 
     const unitList = units.filter(unit => unit.measureIngredient).map(unit => <option key={unit.id} value={unit.id}>{unit.name}s</option>);
@@ -77,7 +83,7 @@ const StepIngredient = ({stepInputState, setStepInputState, start, amount, unit,
             </div>
             {isEditing ? 
                 <button type="button" onClick={() => addIngredient()}>+</button> :
-                <button type="button">-</button> 
+                <button type="button" onClick={() => deleteIngredient()}>-</button> 
                 // if minus is clicked, DELETE ingredient component
             }
         </article>
