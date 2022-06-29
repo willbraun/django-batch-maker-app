@@ -26,6 +26,13 @@ const StepInput = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepU
         setStepUid(stepUid + 1);
     }
 
+    const deleteStep = () => {
+        const newList = addEditRecipeState.steps;
+        const index = newList.findIndex(step => step.id === state.id);
+        newList.splice(index, 1);
+        setAddEditRecipeState({...addEditRecipeState, steps: newList});
+    }
+
     const ingredientList = state.ingredients.map((ingredient, i) => 
         <StepIngredient 
             key={i} 
@@ -60,7 +67,7 @@ const StepInput = ({addEditRecipeState, setAddEditRecipeState, stepUid, setStepU
             </div>
             {isEditing ?
                 <button type="button" onClick={() => addStep()}>Add another step</button> :
-                <button type="button" >Delete step</button>
+                <button type="button" onClick={() => deleteStep()}>Delete step</button>
             }
         </section>
     )
