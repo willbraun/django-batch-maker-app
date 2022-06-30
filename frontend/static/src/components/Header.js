@@ -1,10 +1,14 @@
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Cookies from 'js-cookie';
 import { handleError } from '../helpers';
+import './../styles/display.css'
+import plus from './../images/plus-solid.svg';
+import gear from './../images/gear-solid.svg';
+import user from './../images/user-large-solid.svg';
+
 
 const Header = ({appState, setAppState}) => {
     const navigate = useNavigate();
@@ -30,23 +34,26 @@ const Header = ({appState, setAppState}) => {
     }
     
     return (
-        <Navbar bg="dark" variant="dark" className="header">
-            <Container>
-                <Navbar.Brand>
-                    <Link to={'/'}>Batch Maker</Link>
-                </Navbar.Brand>
-                <Nav className="me-auto">
-                    {/* add replace title values with imgs from font awesome */}
-                    <NavDropdown title="Plus">
-                        <NavDropdown.Item>Add Recipe</NavDropdown.Item>
-                        <NavDropdown.Item>Add Ingredient</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="#">Settings Gear</Nav.Link>
-                    <NavDropdown title="Profile">
-                        <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-            </Container>
+        <Navbar className="header justify-content-between align-items-center px-5">
+            <Nav.Item>
+                <p className="top-left">The kitchen is yours, chef!</p>
+            </Nav.Item>
+            <Nav.Item>
+                <Link className="header-brand" to={'/'}><h1 className="title">Batch Maker</h1></Link>
+            </Nav.Item>
+            <Nav>
+                {/* add replace title values with imgs from font awesome */}
+                <NavDropdown id="header-dropdown1" title={<img src={plus} alt="plus"/>}>
+                    <NavDropdown.Item href="my-recipes/add">Add Recipe</NavDropdown.Item>
+                    <NavDropdown.Item>Add Ingredient</NavDropdown.Item>
+                </NavDropdown>
+                <Nav.Link href="#">
+                    <img src={gear} alt="settings" />
+                </Nav.Link>
+                <NavDropdown id="header-dropdown2" title={<img src={user} alt="profile"/>}>
+                    <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
+                </NavDropdown>
+            </Nav>
         </Navbar>
         
     )

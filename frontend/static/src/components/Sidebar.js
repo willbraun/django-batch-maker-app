@@ -9,7 +9,7 @@ const Sidebar = () => {
             <Nav
                 activeKey="/home"
                 onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-                className="flex-column"
+                className="flex-column-sidebar"
             >
                 <Nav.Item>
                     <Link to={'/my-recipes'}>My Recipes</Link>
@@ -22,6 +22,9 @@ const Sidebar = () => {
                 </Nav.Item>
                 <Nav.Item>
                     <Link to={'/favorites'}>Favorites</Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <p>My Pantry</p>
                 </Nav.Item>
             </Nav>
         </aside>
