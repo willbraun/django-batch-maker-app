@@ -8,9 +8,16 @@ import Step from './Step';
 import './../styles/recipeform.css';
 import plus from './../images/plus-solid.svg'
 
-const RecipeForm = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid }) => {
+const RecipeForm = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid, parentSubmit }) => {
     const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = addEditRecipeState;
     const [preview, setPreview] = useState(image);
+
+    // const [currentStep, setCurrentStep] = useState({
+    //     id: stepUid,
+    //     number: addEditRecipeState.steps.length + 1,
+    //     ingredients: [],
+    //     directions: '',
+    // })
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -36,17 +43,40 @@ const RecipeForm = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSte
         setAddEditRecipeState({...addEditRecipeState, publicRecipe: !publicRecipe})
     }
 
+    const addStep = (step) => {
+        if (step.directions.length > 0) {
+            const newList = addEditRecipeState.steps;
+            newList.push(step)
+            setAddEditRecipeState({...addEditRecipeState, steps: newList});
+            setStepUid(stepUid + 1);
+        }
+        else {
+            alert('Step is missing directions')
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        parentSubmit();
+        // navigate to the new article once you can read it
+    }
+
     const stepList = addEditRecipeState.steps.map((step, i) => 
         <Step 
             key={i}   
-            {...step} 
+            {...step}
+            // currentStep={currentStep} 
+            // setCurrentStep={setCurrentStep} 
+            stepUid={stepUid}
+            setStepUid={setStepUid}
             addEditRecipeState={addEditRecipeState} 
             setAddEditRecipeState={setAddEditRecipeState}
             isEditing={false}
+            addStep={addStep}
         />)
     
     return (
-        <Form className="add-recipe-form">
+        <Form className="add-recipe-form" onSubmit={handleSubmit}>
             <div className="text-row">
                 <p>Basic Info</p>
                 <div className="divider"></div>
@@ -222,14 +252,14 @@ const RecipeForm = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSte
             </Row>
             
             {stepList}
-            <Step  
+            {/* <Step  
                 key={steps.length + 1}
                 addEditRecipeState={addEditRecipeState} 
                 setAddEditRecipeState={setAddEditRecipeState} 
                 stepUid={stepUid}
                 setStepUid={setStepUid} 
                 isEditing={true}
-            />
+            /> */}
 
             <div className="text-row">
                 <p>Personal Notes</p>
@@ -237,6 +267,7 @@ const RecipeForm = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSte
             </div>
             <Form.Group className="mb-3">
                 <Form.Control 
+                    name="notes"
                     as="textarea"
                     rows={3}
                     value={notes}

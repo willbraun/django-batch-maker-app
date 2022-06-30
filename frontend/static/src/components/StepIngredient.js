@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { units } from './../data';
 
-const StepIngredient = ({stepState, setStepState, isEditing, ingUid, setIngUid, amount, unit, name}) => {
+const StepIngredient = ({stepState, setStepState, isEditing, addIngToStep, deleteIngFromStep, ingUid, setIngUid, amount, unit, name}) => {
     const [state, setState] = useState({
         id: ingUid,
         amount: amount ? amount : '',
@@ -25,9 +25,10 @@ const StepIngredient = ({stepState, setStepState, isEditing, ingUid, setIngUid, 
         const keys = Object.keys(state);
         const values = Object.values(state);
         if (!values.includes('')) {
-            const newList = stepState.ingredients;
-            newList.push(state);
-            setStepState({...stepState, ingredients: newList});
+            // const newList = stepState.ingredients;
+            // newList.push(state);
+            // setStepState({...stepState, ingredients: newList});
+            addIngToStep(state);
             setIngUid(ingUid + 1)
         }
         else {
@@ -90,7 +91,7 @@ const StepIngredient = ({stepState, setStepState, isEditing, ingUid, setIngUid, 
             <Col xs={1}>
                 {isEditing ? 
                     <Button variant="outline-secondary" type="button" onClick={() => addIngredient()}>+</Button> :
-                    <Button variant="outline-secondary" type="button" onClick={() => deleteIngredient()}>-</Button> 
+                    <Button variant="outline-secondary" type="button" onClick={() => deleteIngFromStep(state)}>-</Button> 
                 }
             </Col>
         </Row>
