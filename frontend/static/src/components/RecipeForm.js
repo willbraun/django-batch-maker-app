@@ -5,10 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Step from './Step';
-import './../styles/recipeinput.css';
+import './../styles/recipeform.css';
 import plus from './../images/plus-solid.svg'
 
-const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid }) => {
+const RecipeForm = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setStepUid }) => {
     const { image, title, by, publicRecipe, recipeType, prepTime, cookTime, cookTemp, tempUnit, yieldQuantity, yieldName, steps, notes, } = addEditRecipeState;
     const [preview, setPreview] = useState(image);
 
@@ -249,4 +249,4 @@ const RecipeInput = ({ addEditRecipeState, setAddEditRecipeState, stepUid, setSt
     )
 }
 
-export default RecipeInput;
+export default RecipeForm;

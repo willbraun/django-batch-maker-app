@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import RecipeInput from './RecipeInput';
+import RecipeForm from './RecipeForm';
 
 const AddRecipe = () => {
     const blank = {
@@ -23,7 +23,7 @@ const AddRecipe = () => {
     
     return (
         <main>
-            <RecipeInput 
+            <RecipeForm 
                 addEditRecipeState={state} 
                 setAddEditRecipeState={setState}
                 stepUid={stepUid}

@@ -9,7 +9,7 @@
 
 .header {
     position: relative;
-    background-color: #999;
+    background-color: rgb(167, 167, 252);
     display: flex;
     justify-content: space-between;
 }
@@ -44,8 +44,7 @@
     display: inline-block;
     width: var(--sidebar-width);
     height: 100vh;
-    background-color: #ccc;
-    border-right: 1px solid #999;
+    background-color: rgb(223, 223, 253);
 }
 
 .flex-column-sidebar {

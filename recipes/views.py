@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from itertools import chain
 from rest_framework import generics
 from .models import Recipe, User
-from .serializers import RecipeSerializer, RecipePreviewSerializer, RecipeFavoriteUpdateSerializer
+from .serializers import RecipeSerializer, RecipePreviewSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -28,13 +27,7 @@ class MyRecipesListApiView(generics.ListAPIView):
     serializer_class = RecipePreviewSerializer
 
     def get_queryset(self):
-        all = Recipe.objects.filter(author=self.request.user).order_by('-created_at')
-        try:
-            is_home = self.kwargs['home']
-            if is_home == 'home':
-                return all[:4]
-        except:
-            return all
+        return Recipe.objects.filter(author=self.request.user).order_by('-created_at')
 
 
 class MyRecipesCreateApiView(generics.CreateAPIView):
@@ -45,54 +38,18 @@ class MyRecipesCreateApiView(generics.CreateAPIView):
 
 
 class PublicRecipesListApiView(generics.ListAPIView):
+    queryset = Recipe.objects.filter(public=True).order_by('-created_at')
     serializer_class = RecipePreviewSerializer
-
-    def get_queryset(self):
-        all = Recipe.objects.filter(public=True).order_by('-created_at')
-        try:
-            is_home = self.kwargs['home']
-            if is_home == 'home':
-                return all[:5]
-        except:
-            return all
 
 
 class PopularRecipesListApiView(generics.ListAPIView):
     queryset = Recipe.objects.filter(public=True).order_by('-shares')
     serializer_class = RecipePreviewSerializer
 
-    def get_queryset(self):
-        all = Recipe.objects.filter(public=True).order_by('-shares')
-        try:
-            is_home = self.kwargs['home']
-            if is_home == 'home':
-                return all[:5]
-        except:
-            return all
-
 
 class FavoriteRecipesListApiView(generics.ListAPIView):
     serializer_class = RecipePreviewSerializer
 
     def get_queryset(self):
-        all = Recipe.objects.filter(favorited_by=self.request.user).order_by('title')
-        try:
-            is_home = self.kwargs['home']
-            if is_home == 'home':
-                return all[:5]
-        except:
-            return all
-
-
-# class FavoriteRecipeUpdateApiView(generics.UpdateAPIView):
-#     queryset = Recipe.objects.all()
-#     serializer_class = RecipeFavoriteUpdateSerializer
-
-#     def get_queryset(self):
-#         recipe_id = self.kwargs['pk']
-#         return Recipe.objects.filter(id=recipe_id)
-
-#     def perform_update(self, serializer):
-#         self.favorited_by.add(self.request.user)
-        
+        return Recipe.objects.filter(favorited_by=self.request.user).order_by('title')
     
